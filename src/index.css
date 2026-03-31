@@ -1,0 +1,46 @@
+/* global styles and css variables for skilltree */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* css custom properties */
+:root {
+  --forest:       #2B4A1F;
+  --forest-mid:   #4A7C35;
+  --sage:         #8FA974;
+  --sage-light:   #C2D4AF;
+  --cream:        #FAFAFA;
+  --ash:          #F2F2F0;
+  --ash-dark:     #E5E5E2;
+  --ink:          #0D0D0D;
+  --ink-soft:     #3A3A3A;
+  --ink-muted:    #6B6B6B;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans:    "Google Sans", "DM Sans", system-ui, sans-serif;
+
+  --transition-base: 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* base resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
