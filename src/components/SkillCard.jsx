@@ -25,11 +25,11 @@ export default function SkillCard({ skill, showProgress }) {
   return (
     <Link to={'/skills/' + skill.id} className="card block group">
 
-      {/* card image strip - pulled from unsplash via category */}
+      {/* card image strip - imageUrl already contains sizing params from EditCharacterPage */}
       {skill.imageUrl && (
         <div className="h-40 overflow-hidden">
           <img
-            src={skill.imageUrl + '&w=600&q=75'}
+            src={skill.imageUrl}
             alt={skill.name}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"

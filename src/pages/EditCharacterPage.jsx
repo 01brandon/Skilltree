@@ -21,7 +21,7 @@ var CATEGORY_IMAGES = {
   'Programming': 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=75',
   'Design':      'https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&q=75',
   'Mathematics': 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=75',
-  'Science':     'https://images.unsplash.com/photo-1532094349884-543559b64063?w=600&q=75',
+  'Science':    'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=600&q=75',
   'Language':    'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=75',
   'Business':    'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=75',
   'Music':       'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&q=75',

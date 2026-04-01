@@ -1,6 +1,7 @@
 // home page - marketing landing page
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 // intersection observer - adds .visible to elements with .reveal class
 function useReveal() {

@@ -16,6 +16,7 @@ export default function DetailPage() {
   var [activeTab, setActiveTab]     = useState('info')
   var [confirmDel, setConfirmDel]   = useState(false)
   var [deleting, setDeleting]       = useState(false)
+  var [deleteErr, setDeleteErr]     = useState('')
 
   useEffect(function () {
     if (!user || !id) return
@@ -25,12 +26,21 @@ export default function DetailPage() {
     })
   }, [user, id])
 
+  // wrapped in try/catch so a network or permissions error doesn't
+  // permanently lock the button with deleting=true and no feedback
   async function handleDelete() {
     if (!confirmDel) { setConfirmDel(true); return }
     setDeleting(true)
-    await deleteDoc(doc(db, 'users', user.uid, 'skills', id))
-    removeSkill(user.uid, id)
-    navigate('/skills')
+    setDeleteErr('')
+    try {
+      await deleteDoc(doc(db, 'users', user.uid, 'skills', id))
+      removeSkill(user.uid, id)
+      navigate('/skills')
+    } catch (err) {
+      setDeleteErr('Could not delete. Please try again.')
+      setDeleting(false)
+      setConfirmDel(false)
+    }
   }
 
   if (loading) return <div className="flex justify-center py-20"><div className="spinner"></div></div>
@@ -68,19 +78,25 @@ export default function DetailPage() {
             {skill.estimatedHours || '—'} hrs estimated
           </span>
         </div>
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <Link to={'/skills/' + id + '/edit'} className="btn btn-outline text-sm py-2">
-            <i className="fa-solid fa-pen text-xs"></i>
-            Edit
-          </Link>
-          <button
-            onClick={handleDelete}
-            className="btn text-sm py-2 bg-red-50 text-red-600 border border-red-200 hover:bg-red-100"
-            disabled={deleting}
-          >
-            <i className="fa-solid fa-trash text-xs"></i>
-            {confirmDel ? 'Confirm delete' : 'Delete'}
-          </button>
+        <div className="flex flex-col items-end gap-2 flex-shrink-0">
+          <div className="flex items-center gap-3">
+            <Link to={'/skills/' + id + '/edit'} className="btn btn-outline text-sm py-2">
+              <i className="fa-solid fa-pen text-xs"></i>
+              Edit
+            </Link>
+            <button
+              onClick={handleDelete}
+              className="btn text-sm py-2 bg-red-50 text-red-600 border border-red-200 hover:bg-red-100"
+              disabled={deleting}
+            >
+              <i className="fa-solid fa-trash text-xs"></i>
+              {confirmDel ? 'Confirm delete' : 'Delete'}
+            </button>
+          </div>
+          {/* inline error shown if deleteDoc throws */}
+          {deleteErr && (
+            <p className="text-xs text-red-500">{deleteErr}</p>
+          )}
         </div>
       </div>
 

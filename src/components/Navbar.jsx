@@ -16,8 +16,9 @@ export default function Navbar() {
     return function () { window.removeEventListener('scroll', onScroll) }
   }, [])
 
-  function handleLogout() {
-    logout()
+  // logout is async - must be awaited before navigating so auth state clears first
+  async function handleLogout() {
+    await logout()
     navigate('/')
   }
 

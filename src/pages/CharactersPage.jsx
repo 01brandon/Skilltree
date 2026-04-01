@@ -31,8 +31,9 @@ export default function CharactersPage() {
   }, [user])
 
   // filter by search text and active category
+  // use (s.name || '') so a missing name field never throws on .includes()
   var filtered = skills.filter(function (s) {
-    var matchesSearch   = s.name?.toLowerCase().includes(search.toLowerCase())
+    var matchesSearch   = (s.name || '').toLowerCase().includes(search.toLowerCase())
     var matchesCategory = activeCategory === 'All' || s.category === activeCategory
     return matchesSearch && matchesCategory
   })
