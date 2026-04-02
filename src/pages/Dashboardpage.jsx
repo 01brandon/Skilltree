@@ -12,7 +12,6 @@ export default function DashboardPage() {
   var [totalMinutes, setTotalMinutes]   = useState(0)
   var [loading, setLoading]             = useState(true)
 
-  // realtime listener for user skills ordered by last updated
   useEffect(function () {
     if (!user) return
     var ref   = collection(db, 'users', user.uid, 'skills')
@@ -22,7 +21,6 @@ export default function DashboardPage() {
       snap.forEach(function (d) { data.push({ id: d.id, ...d.data() }) })
       setSkills(data)
 
-      // aggregate session totals across all skills
       var sessMin   = 0
       var sessCount = 0
       for (var i = 0; i < data.length; i++) {
@@ -61,7 +59,6 @@ export default function DashboardPage() {
 
   return (
     <div>
-      {/* greeting */}
       <div className="mb-10">
         <h1 className="font-display text-3xl md:text-4xl font-semibold text-ink mb-1">
           {greet}, {name}.
@@ -71,12 +68,11 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      {/* stat cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
         {[
-          { icon: 'fa-solid fa-seedling',      label: 'Skills tracked',  value: skills.length,                                                          sub: 'total'      },
-          { icon: 'fa-regular fa-clock',        label: 'Hours studied',   value: (totalMinutes / 60).toFixed(1),                                         sub: 'cumulative' },
-          { icon: 'fa-solid fa-calendar-check', label: 'Sessions logged', value: totalSessions,                                                          sub: 'all time'   },
+          { icon: 'fa-solid fa-seedling',      label: 'Skills tracked',  value: skills.length,                                                            sub: 'total'      },
+          { icon: 'fa-regular fa-clock',        label: 'Hours studied',   value: (totalMinutes / 60).toFixed(1),                                           sub: 'cumulative' },
+          { icon: 'fa-solid fa-calendar-check', label: 'Sessions logged', value: totalSessions,                                                            sub: 'all time'   },
           { icon: 'fa-solid fa-chart-simple',   label: 'Avg. per skill',  value: skills.length ? Math.round(totalMinutes / skills.length) + ' min' : '—', sub: 'study time' },
         ].map(function (s) {
           return (
@@ -90,7 +86,6 @@ export default function DashboardPage() {
         })}
       </div>
 
-      {/* recent skills header */}
       <div className="flex items-center justify-between mb-5">
         <h2 className="font-display text-xl font-semibold text-ink">Recent skills</h2>
         <div className="flex items-center gap-3">
@@ -102,7 +97,6 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* empty state */}
       {skills.length === 0 ? (
         <div className="bg-white rounded-2xl border border-ash-dark p-12 text-center">
           <i className="fa-solid fa-seedling text-4xl text-ash-dark mb-5 block"></i>
@@ -125,7 +119,7 @@ export default function DashboardPage() {
                     {skill.category}
                   </span>
                   <span className="text-xs text-ink-muted">
-                    {['', 'Beginner', 'Elementary', 'Intermediate', 'Advanced', 'Expert'][skill.level] || 'Beginner'}
+                    {['','Beginner','Elementary','Intermediate','Advanced','Expert'][skill.level] || 'Beginner'}
                   </span>
                 </div>
                 <h3 className="font-display text-lg font-semibold text-ink mb-2 group-hover:text-forest transition-colors leading-snug">
