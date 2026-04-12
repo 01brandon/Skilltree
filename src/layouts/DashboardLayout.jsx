@@ -3,11 +3,11 @@ import { useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
-// sidebar navigation items
 var NAV_ITEMS = [
   { to: '/dashboard',  icon: 'fa-solid fa-gauge',   label: 'Overview'  },
   { to: '/skills',     icon: 'fa-solid fa-seedling', label: 'My Skills' },
   { to: '/skills/new', icon: 'fa-solid fa-plus',     label: 'Add Skill' },
+  { to: '/profile',    icon: 'fa-solid fa-user',     label: 'Profile'   },
 ]
 
 export default function DashboardLayout() {
@@ -21,17 +21,16 @@ export default function DashboardLayout() {
   }
 
   return (
-    <div className="flex min-h-screen bg-ash">
+    <div className="flex min-h-screen" style={{ backgroundColor: 'var(--bg, #F2F2F0)' }}>
 
-      {/* sidebar */}
       <aside
         className={[
-          'flex-shrink-0 bg-cream border-r border-ash-dark flex flex-col transition-all duration-300',
+          'flex-shrink-0 border-r border-ash-dark flex flex-col transition-all duration-300',
           sidebarOpen ? 'w-56' : 'w-16',
         ].join(' ')}
+        style={{ backgroundColor: document.documentElement.classList.contains('dark') ? '#161616' : '#FAFAFA' }}
       >
-        {/* sidebar header */}
-        <div className="flex items-center justify-between px-4 py-5 border-b border-ash-dark">
+        <div className="flex items-center justify-between px-4 py-5 border-b border-ash-dark bg-cream dark:bg-[#161616]">
           {sidebarOpen && (
             <NavLink to="/" className="font-display font-semibold text-ink text-base">
               SkillTree
@@ -46,8 +45,7 @@ export default function DashboardLayout() {
           </button>
         </div>
 
-        {/* nav links */}
-        <nav className="flex-1 py-4 px-2">
+        <nav className="flex-1 py-4 px-2 bg-cream dark:bg-[#161616]">
           {NAV_ITEMS.map(function (item) {
             return (
               <NavLink
@@ -69,8 +67,7 @@ export default function DashboardLayout() {
           })}
         </nav>
 
-        {/* user section */}
-        <div className="border-t border-ash-dark p-3">
+        <div className="border-t border-ash-dark p-3 bg-cream dark:bg-[#161616]">
           {user && sidebarOpen && (
             <div className="flex items-center gap-2 px-2 py-2 mb-2">
               <div className="w-7 h-7 rounded-full bg-forest flex items-center justify-center flex-shrink-0">
@@ -92,10 +89,8 @@ export default function DashboardLayout() {
         </div>
       </aside>
 
-      {/* main content */}
-      <main className="flex-1 min-w-0 overflow-auto">
-        {/* mobile top bar */}
-        <div className="md:hidden flex items-center justify-between px-5 py-4 bg-cream border-b border-ash-dark">
+      <main className="flex-1 min-w-0 overflow-auto bg-ash dark:bg-[#111111]">
+        <div className="md:hidden flex items-center justify-between px-5 py-4 bg-cream dark:bg-[#161616] border-b border-ash-dark">
           <NavLink to="/" className="font-display font-semibold text-ink">SkillTree</NavLink>
           <button onClick={handleLogout} className="text-sm text-ink-muted">Sign out</button>
         </div>

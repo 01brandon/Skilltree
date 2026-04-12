@@ -1,6 +1,7 @@
-// tailwind configuration with custom design tokens
+// tailwind configuration with custom design
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     './index.html',
     './src/**/*.{js,jsx}',
@@ -8,18 +9,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        // primary palette
-        forest:       '#2B4A1F',
-        'forest-mid': '#4A7C35',
-        'forest-light':'#6A9E52',
-        sage:         '#8FA974',
-        'sage-light': '#C2D4AF',
-        cream:        '#FAFAFA',
-        ash:          '#F2F2F0',
-        'ash-dark':   '#E5E5E2',
-        ink:          '#0D0D0D',
-        'ink-soft':   '#3A3A3A',
-        'ink-muted':  '#6B6B6B',
+        forest:         '#2B4A1F',
+        'forest-mid':   '#4A7C35',
+        'forest-light': '#6A9E52',
+        sage:           '#8FA974',
+        'sage-light':   '#C2D4AF',
+        cream:          '#FAFAFA',
+        ash:            '#F2F2F0',
+        'ash-dark':     '#E5E5E2',
+        ink:            '#0D0D0D',
+        'ink-soft':     '#3A3A3A',
+        'ink-muted':    '#6B6B6B',
       },
       fontFamily: {
         display: ['"Playfair Display"', 'Georgia', 'serif'],

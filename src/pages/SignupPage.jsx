@@ -28,11 +28,7 @@ export default function SignupPage() {
       await signup(form.email, form.password, form.name.trim())
       navigate('/dashboard')
     } catch (fireErr) {
-      setErr(
-        fireErr.code === 'auth/email-already-in-use'
-          ? 'That email is already registered. Try signing in instead.'
-          : 'Could not create account. Please try again.'
-      )
+      setErr(fireErr.code === 'auth/email-already-in-use' ? 'That email is already registered.' : 'Could not create account. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -51,15 +47,9 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream flex">
-
-      {/* left image panel */}
+    <div className="min-h-screen bg-cream dark:bg-[#111111] flex transition-colors duration-300">
       <div className="hidden lg:block flex-1 relative overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1000&q=80"
-          alt="person studying at a desk"
-          className="w-full h-full object-cover"
-        />
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1000&q=80" alt="person studying" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-ink/40"></div>
         <div className="absolute top-12 left-10 right-10 text-cream">
           <p className="font-display text-xl font-semibold">SkillTree</p>
@@ -67,12 +57,9 @@ export default function SignupPage() {
         </div>
       </div>
 
-      {/* right form panel */}
       <div className="flex-1 flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-md">
-          <Link to="/" className="font-display text-xl font-semibold text-ink block mb-10 lg:hidden">
-            SkillTree
-          </Link>
+          <Link to="/" className="font-display text-xl font-semibold text-ink block mb-10 lg:hidden">SkillTree</Link>
           <h1 className="font-display text-3xl font-semibold text-ink mb-2">Create your account.</h1>
           <p className="text-ink-muted text-sm mb-8">Free, forever. No credit card needed.</p>
 

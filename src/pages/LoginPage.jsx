@@ -28,11 +28,7 @@ export default function LoginPage() {
       await login(form.email, form.password)
       navigate(from, { replace: true })
     } catch (err) {
-      setLocalErr(
-        err.code === 'auth/invalid-credential'
-          ? 'Incorrect email or password.'
-          : 'Something went wrong. Please try again.'
-      )
+      setLocalErr(err.code === 'auth/invalid-credential' ? 'Incorrect email or password.' : 'Something went wrong. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -53,14 +49,10 @@ export default function LoginPage() {
   var displayErr = localErr || error
 
   return (
-    <div className="min-h-screen bg-cream flex">
-
-      {/* left panel - form */}
+    <div className="min-h-screen bg-cream dark:bg-[#111111] flex transition-colors duration-300">
       <div className="flex-1 flex items-center justify-center px-6 py-20">
         <div className="w-full max-w-md">
-          <Link to="/" className="font-display text-xl font-semibold text-ink block mb-10">
-            SkillTree
-          </Link>
+          <Link to="/" className="font-display text-xl font-semibold text-ink block mb-10">SkillTree</Link>
           <h1 className="font-display text-3xl font-semibold text-ink mb-2">Welcome back.</h1>
           <p className="text-ink-muted text-sm mb-8">Sign in to pick up where you left off.</p>
 
@@ -73,9 +65,7 @@ export default function LoginPage() {
               <label className="block text-xs text-ink-muted mb-1.5">Password</label>
               <input type="password" name="password" value={form.password} onChange={handleChange} placeholder="••••••••" className="input" autoComplete="current-password" />
             </div>
-            {displayErr && (
-              <p className="text-sm text-red-600 bg-red-50 rounded-lg px-4 py-3">{displayErr}</p>
-            )}
+            {displayErr && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-4 py-3">{displayErr}</p>}
             <button type="submit" className="btn btn-primary justify-center py-3" disabled={loading}>
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
@@ -94,20 +84,13 @@ export default function LoginPage() {
 
           <p className="text-sm text-ink-muted text-center mt-8">
             No account?{' '}
-            <Link to="/signup" className="text-forest hover:underline font-medium">
-              Create one — it is free.
-            </Link>
+            <Link to="/signup" className="text-forest hover:underline font-medium">Create one — it is free.</Link>
           </p>
         </div>
       </div>
 
-      {/* right panel - image */}
       <div className="hidden lg:block flex-1 relative overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1000&q=80"
-          alt="books on a shelf"
-          className="w-full h-full object-cover"
-        />
+        <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1000&q=80" alt="books on a shelf" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-forest/50"></div>
         <div className="absolute bottom-12 left-10 right-10 text-cream">
           <p className="font-display text-2xl font-semibold leading-snug">

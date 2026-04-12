@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import ThemeToggle from './ThemeToggle'
 
 export default function Navbar() {
   var { user, logout }        = useAuth()
@@ -9,38 +10,29 @@ export default function Navbar() {
   var [menuOpen, setMenuOpen] = useState(false)
   var navigate                = useNavigate()
 
-  // detect scroll to add background
   useEffect(function () {
     function onScroll() { setScrolled(window.scrollY > 24) }
     window.addEventListener('scroll', onScroll, { passive: true })
     return function () { window.removeEventListener('scroll', onScroll) }
   }, [])
 
-  // logout is async - must be awaited before navigating so auth state clears first
-  async function handleLogout() {
-    await logout()
+  function handleLogout() {
+    logout()
     navigate('/')
   }
-
-  var publicLinks = [
-    { to: '/#benefits',     label: 'Benefits'     },
-    { to: '/#how-it-works', label: 'How It Works' },
-    { to: '/skills',        label: 'Skills'       },
-    { to: '/about',         label: 'About'        },
-  ]
 
   var authLinks = [
     { to: '/dashboard', label: 'Dashboard' },
     { to: '/skills',    label: 'Skills'    },
   ]
 
-  var links = user ? authLinks : publicLinks
+  var links = user ? authLinks : []
 
   return (
     <header
       className={[
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled ? 'bg-cream/95 backdrop-blur-sm nav-scrolled' : 'bg-transparent',
+        scrolled ? 'bg-cream/95 dark:bg-[#0F0F0F]/95 backdrop-blur-sm nav-scrolled' : 'bg-transparent',
       ].join(' ')}
     >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -52,18 +44,25 @@ export default function Navbar() {
 
         {/* desktop links */}
         <ul className="hidden md:flex items-center gap-8 list-none">
-          {links.map(function (link) {
+          <li><a href="/#benefits"     className="text-sm font-medium text-ink-soft hover:text-ink transition-colors">Benefits</a></li>
+          <li><a href="/#how-it-works" className="text-sm font-medium text-ink-soft hover:text-ink transition-colors">How It Works</a></li>
+          <li>
+            <NavLink to="/skills" className={function ({ isActive }) {
+              return 'text-sm font-medium transition-colors ' + (isActive ? 'text-forest' : 'text-ink-soft hover:text-ink')
+            }}>Skills</NavLink>
+          </li>
+          <li>
+            <NavLink to="/about" className={function ({ isActive }) {
+              return 'text-sm font-medium transition-colors ' + (isActive ? 'text-forest' : 'text-ink-soft hover:text-ink')
+            }}>About</NavLink>
+          </li>
+          {user && authLinks.map(function (link) {
             return (
               <li key={link.to}>
                 <NavLink
                   to={link.to}
                   className={function ({ isActive }) {
-                    return [
-                      'text-sm font-medium transition-colors duration-200',
-                      isActive && link.to !== '/#benefits' && link.to !== '/#how-it-works'
-                        ? 'text-forest'
-                        : 'text-ink-soft hover:text-ink',
-                    ].join(' ')
+                    return 'text-sm font-medium transition-colors ' + (isActive ? 'text-forest' : 'text-ink-soft hover:text-ink')
                   }}
                 >
                   {link.label}
@@ -75,6 +74,9 @@ export default function Navbar() {
 
         {/* right actions */}
         <div className="hidden md:flex items-center gap-3">
+          {/* dark/light toggle */}
+          <ThemeToggle />
+
           {user ? (
             <>
               <span className="text-sm text-ink-muted truncate max-w-[140px]">
@@ -107,19 +109,16 @@ export default function Navbar() {
 
       {/* mobile drawer */}
       {menuOpen && (
-        <div className="md:hidden bg-cream border-t border-ash-dark px-6 py-6 flex flex-col gap-5">
-          {links.map(function (link) {
-            return (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="text-sm font-medium text-ink-soft hover:text-ink"
-                onClick={function () { setMenuOpen(false) }}
-              >
-                {link.label}
-              </Link>
-            )
-          })}
+        <div className="md:hidden bg-cream dark:bg-[#0F0F0F] border-t border-ash-dark px-6 py-6 flex flex-col gap-5">
+          <a href="/#benefits"     className="text-sm font-medium text-ink-soft hover:text-ink" onClick={function () { setMenuOpen(false) }}>Benefits</a>
+          <a href="/#how-it-works" className="text-sm font-medium text-ink-soft hover:text-ink" onClick={function () { setMenuOpen(false) }}>How It Works</a>
+          <Link to="/skills" className="text-sm font-medium text-ink-soft hover:text-ink" onClick={function () { setMenuOpen(false) }}>Skills</Link>
+          <Link to="/about"  className="text-sm font-medium text-ink-soft hover:text-ink" onClick={function () { setMenuOpen(false) }}>About</Link>
+          <hr className="border-ash-dark" />
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-ink-muted">Dark mode</span>
+            <ThemeToggle />
+          </div>
           <hr className="border-ash-dark" />
           {user ? (
             <button onClick={handleLogout} className="btn btn-outline text-sm self-start">Sign out</button>
