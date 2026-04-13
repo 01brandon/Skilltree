@@ -42,7 +42,7 @@ export default function Footer() {
             </p>
             <div className="mt-5 flex gap-4">
               <a href="#" aria-label="Twitter"  className="text-cream/50 hover:text-cream transition-colors"><i className="fa-brands fa-x-twitter"></i></a>
-              <a href="#" aria-label="GitHub"   className="text-cream/50 hover:text-cream transition-colors"><i className="fa-brands fa-github"></i></a>
+              <a href="https://github.com/01brandon/Skilltree" aria-label="GitHub"   className="text-cream/50 hover:text-cream transition-colors"><i className="fa-brands fa-github"></i></a>
               <a href="#" aria-label="LinkedIn" className="text-cream/50 hover:text-cream transition-colors"><i className="fa-brands fa-linkedin-in"></i></a>
             </div>
           </div>
