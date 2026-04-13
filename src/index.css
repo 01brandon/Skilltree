@@ -200,3 +200,31 @@ a { color: inherit; text-decoration: none; }
 .dark .bg-forest  { background-color: #1A3012 !important; }
 
 .dark select option { background-color: #1C1C1C; color: #F0F0F0; }
+
+/* mobile nav - show hamburger, hide desktop nav */
+@media (max-width: 767px) {
+  .desktop-nav { display: none !important; }
+  .hamburger-btn { display: flex !important; }
+}
+
+/* desktop nav - show links, hide hamburger */
+@media (min-width: 768px) {
+  .desktop-nav { display: flex !important; }
+  .hamburger-btn { display: none !important; }
+}
+/* force hamburger icon to always be visible */
+.hamburger-btn {
+  color: #0D0D0D !important;
+}
+
+.dark .hamburger-btn {
+  color: #F0F0F0 !important;
+}
+
+.hamburger-btn i {
+  color: #0D0D0D !important;
+}
+
+.dark .hamburger-btn i {
+  color: #F0F0F0 !important;
+}
