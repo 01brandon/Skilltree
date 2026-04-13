@@ -138,42 +138,6 @@ No external state library is used. State is managed with:
 
 ---
 
-
-## Database Structure
-
-```
-Firestore
-└── users/
-    └── {userId}/
-        ├── uid: string
-        ├── email: string
-        ├── displayName: string
-        ├── photoURL: string
-        ├── createdAt: timestamp
-        ├── bio: string
-        ├── skillCount: number
-        └── skills/
-            └── {skillId}/
-                ├── name: string
-                ├── category: string
-                ├── level: number (1–5)
-                ├── description: string
-                ├── estimatedHours: number
-                ├── progress: number (0–100)
-                ├── imageUrl: string
-                ├── resources: array of { title, url, note }
-                ├── createdAt: timestamp
-                ├── updatedAt: timestamp
-                └── sessions/
-                    └── {sessionId}/
-                        ├── duration: number (minutes)
-                        ├── notes: string
-                        ├── date: string (YYYY-MM-DD)
-                        └── createdAt: timestamp
-```
-
-Each user owns their own document and subcollections. No user can query or write to another user's data.
-
 ---
 
 ## Roadmap
