@@ -54,7 +54,7 @@ export default function CharactersPage() {
 
       {/* search bar */}
       <div className="relative mb-5">
-        <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-ink-muted text-sm pointer-events-none"></i>
+
         <input
           type="text"
           value={search}
