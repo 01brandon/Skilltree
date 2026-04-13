@@ -4,12 +4,6 @@ Track every skill. Measure real progress. Build a learning habit that holds.
 
 SkillTree is a study analytics web app where you log study sessions, track skill progress, and maintain daily streaks — all backed by Firebase and built with React.
 
----
-# SkillTree
-
-> Track every skill. Measure real progress. Build a learning habit that holds.
-
-SkillTree is a full-stack study analytics web application built with React and Firebase. Log study sessions, track skill progress across any subject, maintain daily streaks, and visualise your weekly activity — all backed by a persistent Firestore database with real-time updates.
 
 ## Live Demo
 
